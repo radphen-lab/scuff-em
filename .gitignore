@@ -10,6 +10,7 @@ scuff-static
 scuff-cas3D
 scuff-cas2D
 scuff-neq
+scuff-avescatter
 scuff-plotEpsMu
 scuff-rf
 scuff-transmission
@@ -26,6 +27,7 @@ tSmatrix
 !scuff-cas3D/
 !scuff-cas2D/
 !scuff-neq/
+!scuff-avescatter/
 !scuff-plotEpsMu/
 !scuff-rf/
 !scuff-transmission/
