@@ -37,7 +37,6 @@
 
 #define NUMPFTQ 17    // 2P + 3F + 6T1 + 6T2
 #define NUMF    3
-#define NUMPFTIS 3*NUMPFTQ
 #define NO_SCUFF_TRANSFORM false
 
 /***************************************************************/
@@ -107,7 +106,6 @@ double ScaTraceFlux(SNEQData *SNEQD, HMatrix *GDest, HMatrix* DRMatrix,
 	int RegionIdx = 0;
 	HMatrix *DRblock = 0, *GDblock = 0;
 	
-	//Log("Computing scattering at region %i",RegionIdx);
 	
 	if (G->Surfaces[DestSurface]->RegionIndices[0] != RegionIdx &&
 		G->Surfaces[DestSurface]->RegionIndices[1] != RegionIdx)
@@ -135,7 +133,6 @@ double ScaTraceFlux(SNEQData *SNEQD, HMatrix *GDest, HMatrix* DRMatrix,
 		GDest->ExtractBlock(OffsetD, OffsetS, GDblock);
 
 		// Get trace
-		//Log("...Trace, Region=%i, obj = {%i,%i}",RegionIdx,DestSurface+1,nss+1);
 		FMPTrace += MatrixTraceFlux(GDblock, DRblock, scuff_transform);
 		
 		delete GDblock; GDblock = 0;
@@ -161,7 +158,6 @@ double AbsTraceFlux(SNEQData *SNEQD, HMatrix* DRMatrix,
 	HMatrix *DRblock = 0;
 
 	double FMPTrace = 0.0; // two-matrix-product trace
-	//Log("Computing absorption at Region %i",RegionIdx);
 	for (int nb = 0, nsr = 0; nsr < NS; nsr++) {
 		// Prepare matrix block
 		DimD = G->Surfaces[nsr]->NumBFs;
@@ -182,13 +178,11 @@ double AbsTraceFlux(SNEQData *SNEQD, HMatrix* DRMatrix,
 			DRblock = new HMatrix(DimS, DimD, LHM_COMPLEX);
 			DRMatrix->ExtractBlock(OffsetS, OffsetD, DRblock);
 			
-			//Log("...Trace, Region %i, obj = {%i,%i}",RegionIdx,nsr+1,nsr+1);
 			FMPTrace += MatrixTraceFlux(GDblock, DRblock, scuff_transform);
 			delete DRblock;
 			delete GDblock; GDblock = 0;
 		}
 		else {// surface nsr is not connected with RegionIdx, skip row
-			nb = 0 ? -1 : nb;
 			nb += NS - (nsr + 1);
 			continue;
 		}
@@ -197,12 +191,9 @@ double AbsTraceFlux(SNEQData *SNEQD, HMatrix* DRMatrix,
 		// Compute elements off the diagonal
 		//---------------------------------------------------------------------
 		for (int nsc = nsr + 1; nsc < NS; nsc++, nb++) {
-			//Log("nb = %i", nb);
 			DimS = G->Surfaces[nsc]->NumBFs;
 			OffsetS = G->BFIndexOffset[nsc];
 
-			//Log("obj%i, ExtRegion %i", nsc + 1, G->Surfaces[nsc]->RegionIndices[0]);
-			//Log("obj%i, IntRegion %i", nsc + 1, G->Surfaces[nsc]->RegionIndices[1]);
 			if (G->Surfaces[nsc]->RegionIndices[0] == RegionIdx ||
 				G->Surfaces[nsc]->RegionIndices[1] == RegionIdx)
 				GDblock = CopyHMatrixUnpacked(U[nb]);
@@ -212,9 +203,6 @@ double AbsTraceFlux(SNEQData *SNEQD, HMatrix* DRMatrix,
 				DRblock = new HMatrix(DimS, DimD, LHM_COMPLEX);
 				DRMatrix->ExtractBlock(OffsetS, OffsetD, DRblock);
 
-				//Log("...Trace, Region %i, obj = {%i,%i}",RegionIdx,nsr+1,nsc+1);
-				//Log("GDblock, {NR, NC} = {%i, %i}", GDblock->NR, GDblock->NC);
-				//Log("DRblock, {NR, NC} = {%i, %i}", DRblock->NR, DRblock->NC);
 				FMPTrace += MatrixTraceFlux(GDblock, DRblock, scuff_transform);
 				delete DRblock;
 
@@ -223,7 +211,6 @@ double AbsTraceFlux(SNEQData *SNEQD, HMatrix* DRMatrix,
 				DRblock = new HMatrix(DimD, DimS, LHM_COMPLEX);
 				DRMatrix->ExtractBlock(OffsetD, OffsetS, DRblock);
 				
-				//Log("...Trace, Region %i, obj = {%i,%i}",RegionIdx,nsc+1,nsr+1);
 				FMPTrace += MatrixTraceFlux(GDblock, DRblock, scuff_transform);
 				delete DRblock;
 				delete GDblock;	GDblock = 0;
@@ -499,7 +486,6 @@ void StoreMatrix(RWGGeometry *G, int nsa, int nea, int nsb, int neb,
 	int a_index = OffsetSa + 2 * nea;
 	int b_intex = OffsetSb + 2 * neb;
 
-	//for (int nF = 0; nF < NUMF; nF++) {
 		QForce->SetEntry(a_index + 0, b_intex + 0, +Sign*II*QKK[FORCE_IDX]);
 		QForce->SetEntry(a_index + 0, b_intex + 1, -Sign*QKNmNK[FORCE_IDX]);
 		QForce->SetEntry(a_index + 1, b_intex + 0, -Sign*QKNmNK[FORCE_IDX]);
@@ -514,7 +500,6 @@ void StoreMatrix(RWGGeometry *G, int nsa, int nea, int nsb, int neb,
 			QForce->SetEntry(b_intex + 0, a_index + 1, +Sign*QKNmNK[FORCE_IDX]);
 			QForce->SetEntry(b_intex + 1, a_index + 1, +Sign*II*QNN[FORCE_IDX]);
 		}
-	//}
 }
 
 void gradT0_Matrix(RWGGeometry *G, SNEQData *SNEQD, cdouble Omega, HMatrix *dT0, int FORCE_IDX)
@@ -600,12 +585,10 @@ void AverageScatteringFlux(SNEQData *SNEQD, cdouble Omega, HMatrix *PFTMatrix)
 	int NS = G->NumSurfaces;
 	HMatrix *DRMatrix = SNEQD->DRMatrix;
 	HMatrix *T0 = SNEQD->T0;
-	//HMatrix *dT0 = SNEQD->dT0;
 	HMatrix *asymdG = new HMatrix(G->TotalBFs, G->TotalBFs, LHM_COMPLEX);
 	cdouble ScatFlux=0.0, AbsFlux=0.0; 
 	cdouble *AsymFlux = new cdouble[NS];
 	int RegionIdx;
-	//cdouble Aflux; // test
 	
 
 	// compute scattering flux for the source (F. Ramirez 2019)
@@ -687,9 +670,7 @@ void NeqScattering(SNEQData *SNEQD, cdouble Omega, double *kBloch)
   HMatrix **TInt      = SNEQD->TInt; 
   HMatrix **U         = SNEQD->U;
   HMatrix *T0         = SNEQD->T0; // neq sca (F. Ramirez 2019)
-  //HMatrix *dT0       = SNEQD->dT0; // neq sca (F. Ramirez 2019)
   int NS              = SNEQD->G->NumSurfaces;
-  //char *FileBase      = SNEQD->FileBase;
 
   Log("Computing neq quantities at omega=%s...",z2s(Omega));
 
@@ -797,8 +778,6 @@ void NeqScattering(SNEQData *SNEQD, cdouble Omega, double *kBloch)
      Log("LU factorizing...");
      M->LUFactorize();
      
-     //Log("Computing Green Function gradient from EMT method");
-     //gradT0_Matrix(G, SNEQD, Omega, dT0);
 
 
      /*--------------------------------------------------------------*/

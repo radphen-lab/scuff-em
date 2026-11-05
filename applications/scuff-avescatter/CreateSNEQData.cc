@@ -132,11 +132,7 @@ SNEQData *CreateSNEQData(char *GeoFile, char *TransFile,
       sprintf(PFTName,"OPFT");
      else if (PFTMethods[npm]==SCUFF_PFT_EMT_EXTERIOR)
       sprintf(PFTName,"EMTPFT");
-	  // else if (PFTMethods[npm] == SCUFF_AVSCAT_EMT)
-		// sprintf(PFTName, "AVSCAT");
      
-     //SNEQD->SIFluxFileNames[npm]
-     // = vstrdup("%s.AVSCAT.%s",SNEQD->FileBase,PFTName);
      SNEQD->SIFluxFileNames[npm]
       = vstrdup("%s.SIFlux.AVSCAT",SNEQD->FileBase);
      WriteSIFluxFilePreamble(SNEQD, SNEQD->SIFluxFileNames[npm]);
@@ -219,10 +215,6 @@ SNEQData *CreateSNEQData(char *GeoFile, char *TransFile,
   /*- allocate Matrix for Av. Scattering (F. Ramirez 2020) -------*/
   /*--------------------------------------------------------------*/
 	SNEQD->T0 = new HMatrix(G->TotalBFs, G->TotalBFs, LHM_COMPLEX);
-	//SNEQD->dT0 = (HMatrix **)mallocEC(3 * sizeof(HMatrix *));
-	//for (int xyz = 0; xyz < 3; xyz++)
-	//	  SNEQD->dT0[xyz] = 
-	//	  new HMatrix(G->TotalBFs, G->TotalBFs, LHM_COMPLEX);
 	Log("After T0 Av. Scat.: mem=%3.1f GB", GetMemoryUsage() / 1.0e9);
 // neq sca (Francisco 2019)
   /*--------------------------------------------------------------*/

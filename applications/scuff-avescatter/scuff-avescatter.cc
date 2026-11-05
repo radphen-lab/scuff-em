@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
   bool EMTPFT      = false;
   bool OPFT        = false;
   bool DSIPFT      = false;
-  //bool AVSCAT      = false; // F. Ramirez 2020
   int DSIPoints    = 0;
   int DSIPoints2   = 0;
   char *DSIMesh    = 0;

@@ -69,7 +69,6 @@ using namespace scuff;
 #define MAXPFTMETHODS 6
 
 // Hemispherical average scattering (F. Ramirez 2020)
-#define SCUFF_AVSCAT_EMT 10
 #define NUM_AVSCAT 3
 #define EXTERIOR_INDEX	 0
 #define AV_SCATTERING	-1
@@ -123,7 +122,6 @@ typedef struct SNEQData
 
    // neq scattering calculations (Francisco Ramirez 2019)
    HMatrix *T0;    // Scattering matrix
-   HMatrix **dT0;  // Scattering Matrix gradient
 
    /*--------------------------------------------------------------*/
    /*- miscellaneous other options                                -*/
@@ -144,7 +142,7 @@ SNEQData *CreateSNEQData(char *GeoFile, char *TransFile,
                          char *EPFile, char *pFileBase);
 
 /*--------------------------------------------------------------*/
-/*- in GetFlux.cc ----------------------------------------------*/
+/*- in NeqScattering.cc ----------------------------------------*/
 /*--------------------------------------------------------------*/
 //void WriteFlux(SNEQData *SNEQD, cdouble Omega, double *kBloch=0);
 void UndoSCUFFMatrixTransformation(HMatrix *M);
