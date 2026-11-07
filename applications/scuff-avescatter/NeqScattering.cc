@@ -77,9 +77,9 @@ double MatrixTraceFlux(HMatrix *GDest, HMatrix* DRMatrix, bool scuff_transform =
 		scuff_scale[1][1] = 1.0;
 	}
 
-	// Extract characteristic parameters from the destiny surface
+	// GDest is DimD x DimS and DRMatrix is DimS x DimD.
 	int DimD = GDest->NR;
-	int DimS = DRMatrix->NC;
+	int DimS = GDest->NC;
 
 	double FMPTrace = 0.0; //'two-matrix-product trace'
 		// Get trace
