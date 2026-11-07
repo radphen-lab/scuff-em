@@ -296,6 +296,8 @@ AC_CONFIG_FILES([
  applications/scuff-transmission/Makefile
  applications/scuff-avescatter/Makefile
  examples/Makefile
+ examples/BiSphere_Avscat/Makefile
+ examples/CoreShell_Avscat/Makefile
  examples/DiffractionPatterns/Makefile
  examples/CorrugatedDisc/Makefile
  examples/CubeTorus/Makefile
@@ -325,6 +327,7 @@ AC_CONFIG_FILES([
  tests/Makefile
  tests/Mie/Makefile
  tests/Fresnel/Makefile
+ tests/AveScatter/Makefile
 ])
 AC_OUTPUT
 

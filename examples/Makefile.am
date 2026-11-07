@@ -1,4 +1,6 @@
 SUBDIRS =            	\
+ BiSphere_Avscat        \
+ CoreShell_Avscat       \
  DiffractionPatterns	\
  CorrugatedDisc     	\
  CubeTorus           	\

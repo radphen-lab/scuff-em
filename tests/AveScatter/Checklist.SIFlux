@@ -1,0 +1,11 @@
+# Absolute floor for cancellation in the lossless bi-sphere absorption.
+ABSTOL 1.0e-10
+RELTOL 1.0e-8
+
+KEY Transform 1
+KEY Omega     2
+KEY Surface   3
+
+DATA Cabs     4
+DATA Csca     5
+DATA gCsca    6

@@ -1,0 +1,17 @@
+
+# scuff-avescatter run on panxopanza (11/05/26::15:48:20)
+# data file columns:
+# 1 transform tag
+# 2 omega
+# 3 (sourceSurface,destSurface)
+# 4 Orientation Av. Absorption Cross Section, Cabs (um^2)
+# 5 Orientation Av. Scattering Cross Section, Csca (um^2)
+# 6 Orientation Av. Asymmetry parameter * Csca, <cos>*Csca (um^2)
+0.0 1.000000e+00 01 +4.87054076e-05 +2.07963876e+01 +4.26067099e+00
+0.0 1.000000e+00 02 +4.82530517e-05 +2.07932801e+01 +4.25856012e+00
+1.0 1.000000e+00 01 +4.24258895e-05 +2.10529082e+01 +2.85641386e+00
+1.0 1.000000e+00 02 +4.24154468e-05 +2.10534406e+01 +2.85678445e+00
+0.0 3.000000e-01 01 +3.21156950e-09 +6.66447947e-02 +6.01621247e-03
+0.0 3.000000e-01 02 +3.23435645e-09 +6.66447193e-02 +6.01622991e-03
+1.0 3.000000e-01 01 +3.15640123e-09 +6.00783313e-02 +7.65609365e-03
+1.0 3.000000e-01 02 +3.16826948e-09 +6.00783182e-02 +7.65609822e-03
