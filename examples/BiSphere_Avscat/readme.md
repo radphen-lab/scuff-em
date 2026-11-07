@@ -14,8 +14,9 @@ scuff-avescatter --geometry BiSphere.scuffgeo --OmegaFile OmegaFile \
 ```
 
 The output is `BiSphere.SIFlux.AVSCAT`, with two surface rows for each
-frequency and transformation. Columns 4, 5, and 6 give absorption, scattering,
-and g times scattering in um^2. Sum the two surface rows to obtain cluster
+frequency and transformation. Column 3 identifies `UpperSphere` or `LowerSphere`
+using the object label from the geometry file. Columns 4, 5, and 6 give
+absorption, scattering, and g times scattering in um^2. Sum the two surface rows to obtain cluster
 totals. The cluster asymmetry factor is the total of column 6 divided by the
 total of column 5. Individual scattering rows include interference terms.
 

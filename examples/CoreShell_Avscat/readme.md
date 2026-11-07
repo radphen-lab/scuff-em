@@ -12,9 +12,10 @@ scuff-avescatter --geometry CoreShell.scuffgeo --OmegaFile OmegaFile --Threads 4
 ```
 
 The output is `CoreShell.SIFlux.AVSCAT`. Column 4 gives absorption, column 5
-gives scattering, and column 6 gives g times scattering, in um^2. Row `01`
-contains shell absorption and row `02` contains core absorption. Sum each
-column over the two surfaces for the particle totals. The particle asymmetry
+gives scattering, and column 6 gives g times scattering, in um^2. Column 3
+contains the surface label from the geometry file. The `OuterSphere` row
+contains shell absorption and the `InnerSphere` row contains core absorption.
+Sum each column over the two surfaces for the particle totals. The particle asymmetry
 factor is the total of column 6 divided by the total of column 5.
 
 The supplied meshes have 1258 outer and 708 inner triangles. For these inputs,

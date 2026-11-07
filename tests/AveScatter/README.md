@@ -34,7 +34,9 @@ references remain in the source or installed test directory.
 
 `TestAveScatter.sh` computes each case and compares the result with its
 `reference/*.SIFlux.AVSCAT` file using `Checklist.SIFlux`. Transform,
-frequency, and surface identify each row. All three result columns are checked.
+frequency, and surface label identify each row. Column 3 contains the label
+from the geometry's OBJECT or SURFACE declaration, as in scuff-scatter.
+All three result columns are checked.
 The relative tolerance is 1e-8 with a 1e-10 um^2 absolute floor. The floor
 covers cancellation differences in the nearly zero absorption of the
 lossless bi-sphere case.

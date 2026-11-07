@@ -60,7 +60,7 @@ void WriteSIFluxFilePreamble(SNEQData *SNEQD, char *FileName, bool ByRegion = fa
   if (ByRegion)
    fprintf(f,"# %i (sourceRegion,destRegion) \n",nq++);
   else
-   fprintf(f,"# %i (sourceSurface,destSurface) \n",nq++);
+   fprintf(f,"# %i surface label\n",nq++);
 	  for (int nPFT = 0; nPFT<NUM_AVSCAT; nPFT++)
 		  fprintf(f, "# %i Orientation Av. %s\n",
 			  nq++, QuantityNames[nPFT]);

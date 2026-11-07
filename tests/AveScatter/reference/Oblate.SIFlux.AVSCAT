@@ -3,10 +3,10 @@
 # data file columns:
 # 1 transform tag
 # 2 omega
-# 3 (sourceSurface,destSurface)
+# 3 surface label
 # 4 Orientation Av. Absorption Cross Section, Cabs (um^2)
 # 5 Orientation Av. Scattering Cross Section, Csca (um^2)
 # 6 Orientation Av. Asymmetry parameter * Csca, <cos>*Csca (um^2)
-0.0 2.513274e+01 01 +2.29913309e+00 +3.51675754e+00 +2.63564232e+00
-0.0 4.126268e+00 01 +4.31061255e-01 +1.08335194e+01 +8.34894790e+00
-0.0 6.283190e-01 01 +3.30843882e-02 +8.49581314e-02 +6.38908897e-03
+0.0 2.513274e+01 Oblate +2.29913309e+00 +3.51675754e+00 +2.63564232e+00
+0.0 4.126268e+00 Oblate +4.31061255e-01 +1.08335194e+01 +8.34894790e+00
+0.0 6.283190e-01 Oblate +3.30843882e-02 +8.49581314e-02 +6.38908897e-03

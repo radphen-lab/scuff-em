@@ -35,8 +35,10 @@ and its [implementation](https://github.com/bsumlin/PyMieScatt/blob/master/PyMie
 
 Cross sections are in um^2. The asymmetry factor g is dimensionless. Column 6
 of the BEM output is g times Csca. Compute g from the sum of column 6 divided
-by the sum of column 5. For this geometry, row 01 contains shell absorption
-and row 02 contains core absorption.
+by the sum of column 5. Column 3 contains the surface label from the geometry
+file. The `OuterSphere` row contains shell absorption and the `InnerSphere`
+row contains core absorption. The validator also accepts the historical
+identifiers `01` and `02` when inspecting archived results.
 
 ## Confirmed source error and correction
 

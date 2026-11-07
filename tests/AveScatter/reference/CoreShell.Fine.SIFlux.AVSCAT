@@ -3,11 +3,11 @@
 # data file columns:
 # 1 transform tag
 # 2 omega
-# 3 (sourceSurface,destSurface)
+# 3 surface label
 # 4 Orientation Av. Absorption Cross Section, Cabs (um^2)
 # 5 Orientation Av. Scattering Cross Section, Csca (um^2)
 # 6 Orientation Av. Asymmetry parameter * Csca, <cos>*Csca (um^2)
-0.0 1.000000e+00 01 +3.33029726e+00 +1.43774621e+01 +2.63009984e+00
-0.0 1.000000e+00 02 +7.78606249e-01 +0.00000000e+00 +0.00000000e+00
-0.0 3.000000e-01 01 +4.73602338e-02 +3.78628380e-02 +1.58575561e-03
-0.0 3.000000e-01 02 +2.03320164e-02 +0.00000000e+00 +0.00000000e+00
+0.0 1.000000e+00 OuterSphere +3.33029726e+00 +1.43774621e+01 +2.63009984e+00
+0.0 1.000000e+00 InnerSphere +7.78606249e-01 +0.00000000e+00 +0.00000000e+00
+0.0 3.000000e-01 OuterSphere +4.73602338e-02 +3.78628380e-02 +1.58575561e-03
+0.0 3.000000e-01 InnerSphere +2.03320164e-02 +0.00000000e+00 +0.00000000e+00

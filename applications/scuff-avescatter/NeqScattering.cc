@@ -796,7 +796,7 @@ void NeqScattering(SNEQData *SNEQD, cdouble Omega, double *kBloch)
 		 {
 			 fprintf(f, "%s %e ", Tag, real(Omega));
 			 if (kBloch) fprintVec(f, kBloch, G->LDim);
-			 fprintf(f, "%i%i ", 0, nsd + 1);
+			 fprintf(f, "%s ", G->Surfaces[nsd]->Label);
 			 for (int nq = 0; nq<NUM_AVSCAT; nq++)
 				 fprintf(f, "%+.8e ", PFTMatrix->GetEntryD(nsd, nq));
 			 fprintf(f, "\n");

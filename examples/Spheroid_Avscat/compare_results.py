@@ -7,17 +7,20 @@ Created on Wed Nov 10 09:43:21 2021
 
 @author: Francisco Ramirez
 """
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
 spheroid_type = 'oblate' # change name to 'prolate' if needed 
 namefile_exact = spheroid_type + "_exact.dat"
-namefile_sim =  spheroid_type + ".AVSCAT.EMTPFT"
+namefile_sim = spheroid_type + ".SIFlux.AVSCAT"
+if not Path(namefile_sim).is_file():
+    namefile_sim = spheroid_type + ".AVSCAT.EMTPFT"
 lnstyle = ['solid','dashed']
 
 sol = []
-sol.append(np.loadtxt(namefile_exact))
-sol.append(np.loadtxt(namefile_sim))
+sol.append(np.loadtxt(namefile_exact, usecols=(1, 3, 4, 5)))
+sol.append(np.loadtxt(namefile_sim, usecols=(1, 3, 4, 5)))
 
 fig, ax1 = plt.subplots()
 ax2 = plt.twinx()
@@ -30,10 +33,10 @@ plt.show()
 
 # plot exact and simulations
 for i in range(len(sol)):
-    omega = sol[i][:,1]
-    Cabs = sol[i][:,3]
-    Csca = sol[i][:,4]
-    gcos = sol[i][:,5]/sol[i][:,4]
+    omega = sol[i][:,0]
+    Cabs = sol[i][:,1]
+    Csca = sol[i][:,2]
+    gcos = sol[i][:,3]/sol[i][:,2]
     ax1.plot(2*np.pi/omega,Cabs,linestyle = lnstyle[i], color='b',
              label = r'$\langle C_\mathrm{abs}\rangle$')
     ax1.plot(2*np.pi/omega,Csca,linestyle = lnstyle[i], color='r',

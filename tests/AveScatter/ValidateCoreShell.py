@@ -131,6 +131,7 @@ def check_reference():
 
 def validate(path, tolerance):
     groups = {}
+    legacy_labels = {"01": "OuterSphere", "02": "InnerSphere"}
     for line in path.read_text().splitlines():
         if not line.strip() or line.lstrip().startswith("#"):
             continue
@@ -138,7 +139,8 @@ def validate(path, tolerance):
         if len(row) != 6:
             raise ValueError(f"{path}: expected six columns, got {row}")
         tag, omega, surface = row[:3]
-        if tag != "0.0" or surface not in ("01", "02"):
+        surface = legacy_labels.get(surface, surface)
+        if tag != "0.0" or surface not in ("OuterSphere", "InnerSphere"):
             raise ValueError(f"{path}: unexpected transform or surface in {row}")
         values = np.array(row[3:], dtype=float)
         if not np.all(np.isfinite(values)):
@@ -152,12 +154,12 @@ def validate(path, tolerance):
     passed = True
     report = []
     for omega, entries in sorted(groups.items()):
-        if set(entries) != {"01", "02"}:
+        if set(entries) != {"OuterSphere", "InnerSphere"}:
             raise ValueError(f"{path}: expected outer and inner surfaces at omega {omega}")
-        total = entries["01"] + entries["02"]
+        total = entries["OuterSphere"] + entries["InnerSphere"]
         observed = dict(zip(("Cabs", "Csca", "gCsca"), map(float, total)))
-        observed["Cabs_shell"] = float(entries["01"][0])
-        observed["Cabs_core"] = float(entries["02"][0])
+        observed["Cabs_shell"] = float(entries["OuterSphere"][0])
+        observed["Cabs_core"] = float(entries["InnerSphere"][0])
         expected = coated_sphere(omega)
         physical = (observed["Cabs_core"] >= 0 and observed["Cabs_shell"] >= 0
                     and total[1] > 0 and abs(total[2]) <= total[1])
